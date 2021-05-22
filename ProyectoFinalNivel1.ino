@@ -35,7 +35,11 @@
 
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
+#include <Servo.h>
 
+Servo Servo1;
+Servo Servo2;
+Servo Servo3;
 
 // You should get Auth Token in the Blynk App.
 // Go to the Project Settings (nut icon).
@@ -43,14 +47,18 @@ char auth[] = "KLtiieKVE-fmogTN3OLKJCbsDW_uSHQH";
 
 // Your WiFi credentials.
 // Set password to "" for open networks.
-char ssid[] = "Josephus";
-char pass[] = "123456789";
+char ssid[] = "PINZONLOPEZ";
+char pass[] = "JLJDJPSPPL";
+
 
 void setup()
 {
   // Debug console
+  Servo1.attach(13);
+  Servo2.attach(12);
+  Servo3.attach(14);
+  
   Serial.begin(9600);
-
   Blynk.begin(auth, ssid, pass);
 }
 
