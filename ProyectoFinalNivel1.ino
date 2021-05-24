@@ -31,16 +31,10 @@
 
 /* Comment this out to disable prints and save space */
 #define BLYNK_PRINT Serial
-
-
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 #include <Servo.h>
-
-Servo Servo1;
-Servo Servo2;
-Servo Servo3;
-
+  
 // You should get Auth Token in the Blynk App.
 // Go to the Project Settings (nut icon).
 char auth[] = "KLtiieKVE-fmogTN3OLKJCbsDW_uSHQH";
@@ -50,16 +44,26 @@ char auth[] = "KLtiieKVE-fmogTN3OLKJCbsDW_uSHQH";
 char ssid[] = "PINZONLOPEZ";
 char pass[] = "JLJDJPSPPL";
 
+int PinServo1 = 2;
+int PinServo2 = 4;
+int PinServo3 = 5;
+
+Servo Servo1;
+Servo Servo2;
+Servo Servo3;
 
 void setup()
 {
   // Debug console
-  Servo1.attach(13);
-  Servo2.attach(12);
-  Servo3.attach(14);
-  
-  Serial.begin(9600);
+   
+  Serial.begin(115200);
   Blynk.begin(auth, ssid, pass);
+  Servo1.attach(PinServo1);
+  Servo1.write(0);
+  Servo2.attach(PinServo2);
+  Servo2.write(0);
+  Servo3.attach(PinServo1);
+  Servo3.write(0);
 }
 
 void loop()
