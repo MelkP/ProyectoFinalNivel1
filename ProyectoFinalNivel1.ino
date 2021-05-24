@@ -41,8 +41,8 @@ char auth[] = "KLtiieKVE-fmogTN3OLKJCbsDW_uSHQH";
 
 // Your WiFi credentials.
 // Set password to "" for open networks.
-char ssid[] = "PINZONLOPEZ";
-char pass[] = "JLJDJPSPPL";
+char ssid[] = "Josephus";
+char pass[] = "123456789";
 
 int PinServo1 = 2;
 int PinServo2 = 4;
@@ -51,6 +51,8 @@ int PinServo3 = 5;
 Servo Servo1;
 Servo Servo2;
 Servo Servo3;
+
+int pos=0;
 
 void setup()
 {
@@ -62,11 +64,22 @@ void setup()
   Servo1.write(0);
   Servo2.attach(PinServo2);
   Servo2.write(0);
-  Servo3.attach(PinServo1);
+  Servo3.attach(PinServo3);
   Servo3.write(0);
 }
 
 void loop()
 {
   Blynk.run();
+ 
+}
+
+BLYNK_WRITE(V1){
+  Servo1.write(2*param.asInt());
+}
+BLYNK_WRITE(V2){
+  Servo2.write(2*param.asInt());
+}
+BLYNK_WRITE(V3){
+  Servo3.write(2*param.asInt());
 }
