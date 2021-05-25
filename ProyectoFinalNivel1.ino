@@ -34,6 +34,7 @@
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 #include <Servo.h>
+#include <Stepper.h>
   
 // You should get Auth Token in the Blynk App.
 // Go to the Project Settings (nut icon).
@@ -52,8 +53,10 @@ Servo Servo1;
 Servo Servo2;
 Servo Servo3;
 
-int pos=0;
+const int stepsPerRevolution = 2038;
+Stepper Stepper1 = Stepper(stepsPerRevolution,D5,D7,D6,D8);
 
+int Direction=3;
 void setup()
 {
   // Debug console
@@ -71,6 +74,15 @@ void setup()
 void loop()
 {
   Blynk.run();
+  if (Direction==0){
+    yield();
+    Stepper1.step(1);
+    delayMicroseconds(3000);
+  }else if(Direction==1){
+    yield(); 
+    Stepper1.step(-1);
+    delayMicroseconds(3000);
+  }
  
 }
 
@@ -82,4 +94,20 @@ BLYNK_WRITE(V2){
 }
 BLYNK_WRITE(V3){
   Servo3.write(2*param.asInt());
+}
+
+BLYNK_WRITE(V4){
+ if(param.asInt()==1){
+  Direction= 0;
+ }else{
+  Direction = 3;
+ }
+}
+
+BLYNK_WRITE(V5){
+ if(param.asInt()==1){
+  Direction= 1;
+ }else{
+  Direction = 3;
+ }
 }
