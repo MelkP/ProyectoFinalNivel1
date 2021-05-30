@@ -64,11 +64,11 @@ void setup()
   Serial.begin(115200);
   Blynk.begin(auth, ssid, pass);
   Servo1.attach(PinServo1);
-  Servo1.write(0);
+  Servo1.write(90);
   Servo2.attach(PinServo2);
   Servo2.write(0);
   Servo3.attach(PinServo3);
-  Servo3.write(0);
+  Servo3.write(90);
 }
 
 void loop()
@@ -87,13 +87,17 @@ void loop()
 }
 
 BLYNK_WRITE(V1){
-  Servo1.write(2*param.asInt());
+  Servo1.write(map(2*param.asInt(), 0, 90, 90,0));
 }
 BLYNK_WRITE(V2){
-  Servo2.write(2*param.asInt());
+  Servo2.write(map(2*param.asInt(),0,90,90,0));
 }
 BLYNK_WRITE(V3){
-  Servo3.write(2*param.asInt());
+  if(param.asInt()==1){
+  Servo3.write(0);
+  }else{
+  Servo3.write(180);
+  }
 }
 
 BLYNK_WRITE(V4){
